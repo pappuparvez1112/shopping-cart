@@ -29,7 +29,7 @@
                            <input id="phonecount" type="text" class="form-control text-center" value="1">
                            <button onclick="handleProductChange('phone', true)" class="btn btn-default"><i  class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="phonetotal">1219</span></h5>
+                        <h5>$ <span id="phonetotal">1250</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="totalprice">1250</span></h5>
+                        <h5>$ <span id="taxid">0</span></h5>
+                        <h5>$ <span id="garndtotal">1250</span></h5>
                      </div>
                   </div>
                </div>
@@ -106,7 +106,25 @@
                productTotal=productNewCount*59;
             }
             document.getElementById(product+"total").innerText=productTotal;
+            calculateTotal();
 
+         }
+         function calculateTotal(){
+           const phoneCount=getInputValue('phone');
+           const caseCount=getInputValue('case');
+            
+            const totalPrice=phoneCount*1250+caseCount*59;
+            document.getElementById('totalprice').innerText=totalPrice;
+            const tax=Math.round(totalPrice*.10);
+            document.getElementById('taxid').innerText=tax;
+            const grandTotal=totalPrice+tax;
+            document.getElementById('garndtotal').innerText=grandTotal;
+
+         }
+         function getInputValue(product){
+            const productInput=document.getElementById( product+'count');
+            const productCount=parseInt(productInput.value);
+            return productCount;
          }
          // function handleProductChangePhone(isIncrease){
          //    const phoneInput=document.getElementById("phonecount");
